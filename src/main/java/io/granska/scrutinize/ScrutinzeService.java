@@ -1,35 +1,32 @@
 package io.granska.scrutinize;
 
-import io.granska.entity.Token;
+import io.granska.entity.Analysis;
 import io.granska.granska.GranskaService;
-import io.granska.repository.TokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.List;
 
-
+@Service
 public class ScrutinzeService {
 
-    private final TokenRepository tokenRepository;
     private final GranskaService granskaService;
 
     @Autowired
-    public ScrutinzeService(TokenRepository tokenRepository, GranskaService granskaService) {
-        this.tokenRepository = tokenRepository;
+    public ScrutinzeService(GranskaService granskaService) {
         this.granskaService = granskaService;
     }
 
 
 
-    public ScrutResult scrutinize(String language, String[] split) {
-        System.out.println("Granska lang: " + language + " " + Arrays.asList(split));
-        granskaService.scrutinize(Arrays.asList(split));
+    public Analysis scrutinize(String language, String input) {
+        String[] split = input.split("\\+");
 
-        return  ResultBuilder.builder()
-                .withInput(split)
-                .withStatus("SUCCESS")
-                .build();
+        System.out.println("Granska lang: " + language + " " + Arrays.asList(split));
+        Analysis result = granskaService.scrutinize(Arrays.asList(split));
+
+        result.raw = input;
+        return result;
     }
 
 

@@ -1,20 +1,20 @@
-package io.granska.granska;
+package io.granska.granska.adapter;
 
-import org.springframework.stereotype.Component;
+import io.granska.entity.Analysis;
+import io.granska.granska.Adapter;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.List;
 
-@Component
-public class GranskaAdapter {
+public class GranskaAdapter implements Adapter {
 
-    private final static String COMMAND = "ping -c 3 google.com";
+    private final static String COMMAND = "ls";
 
 
-    public void run(List<String> tokens) {
+    public Analysis get(List<String> tokens) {
         String s = executeCommand(COMMAND);
-        System.out.println(">" + s + "<");
+        return null;
     }
 
     private String executeCommand(String command) {
@@ -34,7 +34,7 @@ public class GranskaAdapter {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Can not parse granska information");
         }
 
         return output.toString();

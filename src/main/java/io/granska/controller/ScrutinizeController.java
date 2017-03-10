@@ -1,6 +1,6 @@
 package io.granska.controller;
 
-import io.granska.scrutinize.ScrutResult;
+import io.granska.entity.Analysis;
 import io.granska.scrutinize.ScrutinzeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +26,7 @@ public class ScrutinizeController {
     }
 
     @RequestMapping(value = "scrutinize/{language}/{tokens}", method = RequestMethod.GET, produces = "application/json")
-    public ScrutResult scrutinize(@PathVariable final String language, @PathVariable final String tokens) {
-        return scrutinzeService.scrutinize(language, tokens.split("\\+"));
+    public Analysis scrutinize(@PathVariable final String language, @PathVariable final String tokens) {
+        return scrutinzeService.scrutinize(language, tokens);
     }
 }
