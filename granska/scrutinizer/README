@@ -1,0 +1,17 @@
+Building requires the following packages to be installed on
+your machine:
+g++, makedepend, flex, bison and xerces-c-3.1.1
+
+To build run 'make' and install the library with 'sudo make install'.
+
+This will create two executables: scrutinizer and testlibrary;
+and a dynamic library: 'granska'.
+'scrutinizer' is the actual granska program and 'testlibrary' is
+a small program that makes use of the library 'granska'.
+To run a test to see that testlibrary works, run
+'make test'
+
+Before you run the programs you must run the script 'setEnv.sh'. 
+run it as: . setEnv.sh 
+Note the space after the dot. If not used, the variables will only
+be set within the sript setEnv.sh. 
